@@ -1,14 +1,27 @@
 public class PalindromeCheckerApp {
 
-    public static boolean isPalindrome(String input) {
+    public static void main(String[] args) {
 
-        // Remove spaces and convert to lowercase
-        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
+        Scanner sc = new Scanner(System.in);
 
-        // Reverse the string
-        String reversed = new StringBuilder(cleaned).reverse().toString();
+        // Ask user to enter a string
+        System.out.print("Enter a string: ");
+        String original = sc.nextLine();
 
-        // Compare original and reversed
-        return cleaned.equals(reversed);
+        String reversed = "";
+
+        // Reverse the string using a for loop
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
+        }
+
+        // Compare original and reversed string using equals()
+        if (original.equals(reversed)) {
+            System.out.println("The given string is a Palindrome.");
+        } else {
+            System.out.println("The given string is NOT a Palindrome.");
+        }
+
+        sc.close();
     }
 }
