@@ -1,37 +1,49 @@
-import java.util.Stack;
+public class PalindromeCheckerApp {
 
-class PalindromeCheckerApp {
+    /**
+     * Application entry point for UC11.
+     * @param args Command-line arguments
+     */
+    public static void main(String[] args) {
+        PalindromeService service = new PalindromeService();
 
-    // Public method exposed to users
+        String input = "A man a plan a canal Panama";
+        boolean result = service.checkPalindrome(input);
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+}
+
+/**
+ * Service class that contains palindrome logic.
+ * Demonstrates encapsulation and separation of concerns.
+ */
+class PalindromeService {
+
+    /**
+     * Checks whether the input string is a palindrome.
+     * Ignores case and non-alphanumeric characters.
+     *
+     * @param input Input string
+     * @return true if palindrome, false otherwise
+     */
     public boolean checkPalindrome(String input) {
-        if (input == null) {
-            return false;
-        }
+        // Normalize: remove non-alphanumeric chars and convert to lowercase
+        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        String cleanedInput = preprocess(input);
-        return isPalindromeUsingStack(cleanedInput);
-    }
+        // Initialize pointers
+        int start = 0;
+        int end = normalized.length() - 1;
 
-    // Encapsulated helper method
-    private String preprocess(String input) {
-        return input.replaceAll("[^a-zA-Z0-9]", "")
-                .toLowerCase();
-    }
-
-    // Internal stack-based palindrome logic
-    private boolean isPalindromeUsingStack(String input) {
-        Stack<Character> stack = new Stack<>();
-
-        for (char ch : input.toCharArray()) {
-            stack.push(ch);
-        }
-
-        for (char ch : input.toCharArray()) {
-            if (ch != stack.pop()) {
+        // Compare characters moving inward
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
                 return false;
             }
+            start++;
+            end--;
         }
-
         return true;
     }
 }
