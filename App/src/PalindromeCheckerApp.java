@@ -3,10 +3,9 @@ import java.util.Scanner;
 public class PalindromeCheckerApp {
 
     public static boolean isPalindrome(String input) {
-        // Step 1: Normalize the string
-        String normalized = input.toLowerCase().replaceAll(" ", "");
+        // Normalize string: remove non-alphanumeric chars and convert to lowercase
+        String normalized = input.toLowerCase().replaceAll("[^a-z0-9]", "");
 
-        // Step 2: Two-pointer technique
         int left = 0;
         int right = normalized.length() - 1;
 
@@ -28,7 +27,7 @@ public class PalindromeCheckerApp {
         String input = scanner.nextLine();
 
         if (isPalindrome(input)) {
-            System.out.println("It is a palindrome (ignoring case and spaces).");
+            System.out.println("It is a palindrome (ignoring case, spaces, and symbols).");
         } else {
             System.out.println("It is NOT a palindrome.");
         }
